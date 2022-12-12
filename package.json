@@ -1,0 +1,18 @@
+{
+  "name": "pre_entregas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server/server.js",
+    "dev": "nodemon src/server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Evelyn Andrada",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
