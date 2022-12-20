@@ -1,0 +1,20 @@
+{
+  "name": "desafio_entregable4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server/server.js",
+    "dev": "nodemon src/server/server.js"
+  },
+  "keywords": [],
+  "author": "Evelyn Andrada",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "socket.io": "^4.5.4"
+  }
+}
