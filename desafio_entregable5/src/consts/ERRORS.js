@@ -1,0 +1,5 @@
+export const ERRORS = {
+    NOT_FOUND_ERROR,
+    VALIDATION_ERROR,
+    CODE_REPEAT_ERROR,
+  };

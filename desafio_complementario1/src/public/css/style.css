@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  }
+  
+  body {
+    background-color:  #61dafb;;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 50px;
+    background-color: white;
+  }
+  
+  ul {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  img {
+    max-width: 200px;
+    height: 200px;
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  p {
+    color: blueviolet;
+  }
+  
+  .products__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .product__container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    height: 450px;
+    width: 350px;
+    max-width: 400px;
+    border: 1px solid #777;
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: aliceblue;
+  }
+  
+  .product__container > h4 {
+    font-size: 40;
+    font-weight: 800;
+  }
+  
+  .product__category {
+    width: 100%;
+    border: 1px solid #777;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0.3rem;
+    background-color: #aaa;
+  }
+  
+  .chat__container {
+    margin: 3rem;
+    padding: 1rem;
+    background-color: aliceblue;
+    border-radius: 10px;
+  }
+
+  .chat__container > h3 {
+    text-align: center;
+  }
+  
+  #messages__container {
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  #user__input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: .5rem;
+  }
