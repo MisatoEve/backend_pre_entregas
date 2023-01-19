@@ -4,10 +4,9 @@ import Managers from "../dao/managers/index.js";
 const Router = express.Router();
 
 //Mostrar todos los productos
-Router.get("/", async (req, res) => {
+Router.get("/products", async (req, res) => {
   try {
-    const { limit, page, sort } = req.query;
-    const query = req.query.query;
+    const { limit, page, sort, query } = req.query;
     const options = {
       limit: limit || 5,
       page: page || 1,
@@ -44,13 +43,13 @@ Router.get("/", async (req, res) => {
 });
 
 //Mostrar un producto detallado
-Router.get("/:pid", async (req, res) => {
+Router.get("/products/:pid", async (req, res) => {
   try {
     const { pid } = req.params;
 
     const product = await Managers.ProductsManager.getProductById(pid);
 
-    res.render("cart", {
+    res.render("productDetail", {
       style: "styles.css",
       product,
     });
@@ -64,4 +63,26 @@ Router.get("/:pid", async (req, res) => {
   }
 });
 
+//Muestra un carrito
+Router.get("/carts/:cid", async (req, res) => {
+  try {
+    const { cid } = req.params;
+
+    const result = await Managers.CartsManager.getCartById(cid);
+
+    const cart = result.cart;
+
+    res.render("cart", {
+      style: "styles.css",
+      cart,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.send({
+      status: "error",
+      error: error.message || "SOMETHING WENT WRONG",
+    });
+  }
+});
 export default Router;

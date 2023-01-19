@@ -6,9 +6,7 @@ const Router = express.Router();
 //Mostrar todos los productos
 Router.get("/", async (req, res) => {
   try {
-    const { sort, query } = req.query;
-    const page = Number(req.query.page);
-    const limit = Number(req.query.limit);
+    const { sort, query, page, limit } = req.query;
     const options = {
       limit: limit || 5,
       page: page || 1,

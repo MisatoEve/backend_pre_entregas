@@ -23,6 +23,13 @@ const productSchema = new mongoose.Schema({
   },
 });
 
+mongoosePaginate.paginate.options = {
+  limit: 10,
+  page: 1,
+  sort: { price: 1 },
+  lean: true,
+};
+
 productSchema.plugin(mongoosePaginate);
 
 const productsModel = mongoose.model(productsCollection, productSchema);

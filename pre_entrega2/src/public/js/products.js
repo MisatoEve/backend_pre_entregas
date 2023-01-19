@@ -1,4 +1,4 @@
-// agregando productos desde el front
+//Agregando productos desde el front
 const addToCartBtn = document.getElementById("addProduct__btn");
 const pid = addToCartBtn.value;
 

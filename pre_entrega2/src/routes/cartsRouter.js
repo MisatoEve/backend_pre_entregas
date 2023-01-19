@@ -69,7 +69,7 @@ Router.get("/:cid", async (req, res) => {
   }
 });
 
-// Agrego un producto al carrito
+//Agrego un producto al carrito
 Router.post("/:cid/product/:pid", async (req, res) => {
   try {
     const { cid, pid } = req.params;
@@ -90,7 +90,7 @@ Router.post("/:cid/product/:pid", async (req, res) => {
   }
 });
 
-// Eliminar del carrito el producto seleccionado
+//Eliminar del carrito el producto seleccionado
 Router.delete("/:cid/product/:pid", async (req, res) => {
   try {
     const { cid, pid } = req.params;
@@ -111,9 +111,22 @@ Router.delete("/:cid/product/:pid", async (req, res) => {
   }
 });
 
-// Agregar al carrito un array de productos
+//Agregar al carrito un array de productos
 Router.put("/:cid", async (req, res) => {
   try {
+    const { cid } = req.params;
+
+    const products = req.body;
+
+    const result = await Managers.CartsManager.addArrayOfProudcts(
+      cid,
+      products
+    );
+
+    res.send({
+      status: "succes",
+      payload: result,
+    });
   } catch (error) {
     console.log(error);
 
@@ -124,7 +137,7 @@ Router.put("/:cid", async (req, res) => {
   }
 });
 
-// Actualizar la cantidad de un producto
+//Actualizar la cantidad de un producto
 Router.put("/:cid/product/:pid", async (req, res) => {
   try {
     const { quantity } = req.body;
