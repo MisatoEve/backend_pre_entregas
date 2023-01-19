@@ -1,0 +1,41 @@
+<main>
+  <div class="filters__container">
+    <div>
+      <h4>Filters:</h4>
+      <div>category</div>
+      <button>most expensive</button>
+      <button>less expensive</button>
+    </div>
+    <div class="pagination__container">
+      <button><a href={{response.prevLink}}>Anterior</a></button>
+      <button><a href={{response.nextLink}}>Siguiente</a></button>
+    </div>
+  </div>
+  <div class="products__container">
+    {{#each response.payload}}
+      <div class="product__container">
+        <div class="product__category">
+          <span>{{this.category}}</span>
+        </div>
+        <div class="product__img--container">
+          <img src={{this.thumbnail}} alt={{this.title}} />
+        </div>
+        <h4 class="product__price">PRICE: ${{this.price}}</h4>
+        <h3 class="product__title">{{this.title}}</h3>
+        <button>add to cart</button>
+      </div>
+    {{/each}}
+  </div>
+  <div class="filters__container">
+    <div>
+      <h4>Filters:</h4>
+      <div>category</div>
+      <button>most expensive</button>
+      <button>less expensive</button>
+    </div>
+    <div class="pagination__container">
+      <button><a href={{response.prevLink}}>Anterior</a></button>
+      <button><a href={{response.nextLink}}>Siguiente</a></button>
+    </div>
+  </div>
+</main>
