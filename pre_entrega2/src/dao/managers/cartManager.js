@@ -36,7 +36,7 @@ export class CartManager {
   getCartById = async (cid) => {
     try {
       const cart = await cartModel
-      .find({ _id: cid })
+      .findById({ _id: cid })
       .populate("cart.product")
       .lean();
 
@@ -121,7 +121,7 @@ export class CartManager {
     }
   };
 
-  // Agregar un array de productos al carrito
+  //▼Agregar un array de productos al carrito
   addArrayOfProudcts = async (cid, products) => {
     try {
       const productsMap = products.map((product) => {

@@ -16,10 +16,12 @@ export class ProductManager {
         }
   
         if (
-          query === "jewelery" ||
-          query === "men's clathing" ||
-          query === "electronics" ||
-          query === "women's clothinga"
+          query === "video games" ||
+          query === "televisores" ||
+          query === "camaras" ||
+          query === "tablet" ||
+          query === "celular" ||
+          query === "notebook"
         ) {
           const products = await productsModel.paginate(
             { category: query },
