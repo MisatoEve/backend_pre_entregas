@@ -147,9 +147,7 @@ export class CartManager {
   deleteProductFromCart = async (cid, pid) => {
     try {
       const deleteOne = await cartModel.updateOne(
-        {
-          _id: cid,
-        },
+        { _id: cid },
         {
           $pull: {
             cart: { product: pid },
