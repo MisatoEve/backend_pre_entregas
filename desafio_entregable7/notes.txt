@@ -1,0 +1,11 @@
+APPNAME: MikunStore
+
+http://localhost:8080/auth/githubcallback
+
+Owned by: @MisatoEve
+
+App ID: 288565
+
+Client ID: Iv1.e54c630d0709c7d4
+
+b13aad70a022a1469ffb5acd4c854ebf5929ee59
