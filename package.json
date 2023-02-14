@@ -13,6 +13,7 @@
   "author": "Evelyn Andrada",
   "license": "ISC",
   "dependencies": {
+    "commander": "^10.0.0",
     "express": "^4.18.2"
   }
 }

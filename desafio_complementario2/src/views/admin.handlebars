@@ -1,0 +1,14 @@
+<main class="layout">
+  <div class="admin__container">
+    <h3 class="admin__title">Usuarios registrados</h3>
+    {{#each users}}
+      <ul class="admin__ul">
+        <li>Nombre: {{this.first_name}}</li>
+        <li>Apellido: {{this.last_name}}</li>
+        <li>Edad: {{this.age}}</li>
+        <li>Mail: {{this.email}}</li>
+        <li>Tipo: {{this.role}}</li>
+      </ul>
+    {{/each}}
+  </div>
+</main>
