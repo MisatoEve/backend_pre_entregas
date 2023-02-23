@@ -1,0 +1,46 @@
+<main class="layout">
+  <div class="register__container">
+    <h2 class="register__title">Por favor complete todos los campos para
+      registrarse</h2>
+    <form action="/register" method="POST" class="register__form">
+      <div class="register__box--row">
+        <div class="register__box--column">
+
+          <input
+            type="text"
+            placeholder="Nombre"
+            class="register__input"
+            name="first_name"
+          />
+          <input
+            type="text"
+            placeholder="Apellido"
+            class="register__input"
+            name="last_name"
+          />
+          <input
+            type="number"
+            placeholder="Edad"
+            class="register__input"
+            name="age"
+          />
+        </div>
+        <div class="register__box--column">
+          <input
+            type="email"
+            placeholder="Email"
+            class="register__input"
+            name="email"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            class="register__input"
+            name="password"
+          />
+        </div>
+      </div>
+      <input type="submit" class="register__inputBtn" value="Enviar" />
+    </form>
+  </div>
+</main>
