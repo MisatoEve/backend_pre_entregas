@@ -14,23 +14,23 @@ import initializePassport from "./config/passport.config.js";
 import sessionRouter from "./users/routes/sessions.routes.js";
 import MongoConnection from "./mongo.js";
 
-//const and env variables
+//▼Const and env variables
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-//init mongoDB
+//▼Init mongoDB
 MongoConnection.getInstance();
 
-//passport
+//▼Passport
 initializePassport();
 
-//handlebars
+//▼Handlebars
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
-//middlewares
+//▼Middlewares
 app.use(session(MongoStoreInstance));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,14 +39,14 @@ app.use(passport.session());
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-//routers
+//▼Routers
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/", userRouter);
 app.use("/", viewsRouter);
 
-//app.listen
+//▼App.listen
 app.listen(PORT, () => {
   console.log("Server up!");
 });

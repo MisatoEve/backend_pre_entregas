@@ -14,10 +14,12 @@ class ProductsServices {
       }
 
       if (
-        query === "jewelery" ||
-        query === "men's clothings" ||
-        query === "women's clothings" ||
-        query === "electronics"
+        query === "video games" ||
+        query === "televisores" ||
+        query === "camaras" ||
+        query === "tablet" ||
+        query === "celular" ||
+        query === "notebook"
       ) {
         const products = await productsModel.paginate(
           { category: query },

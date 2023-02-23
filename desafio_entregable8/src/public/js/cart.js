@@ -1,4 +1,4 @@
-//eliminando productos desde el front
+//▼Eliminar productos desde el front
 const deleteBtns = document.querySelectorAll("#cart__product--deleteBtn");
 
 const deleteProduct = async (cid, pid) => {
@@ -22,7 +22,7 @@ deleteBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const pid = btn.value;
 
-    deleteProduct("63c5494987fcf899bff4f698", pid);
+    deleteProduct("63bf7c50fda56c9790a3b567", pid);
     location.reload();
   });
 });

@@ -1,4 +1,4 @@
-// GENERAR LOGICA PARA TRABAJAR CON PASSPORT JWT, LOCAL Y GITHUB
+//▼LOGICA PARA PASSPORT JWT, LOCAL Y GITHUB
 import passport from "passport";
 import passportJwt from "passport-jwt";
 import passportLocal from "passport-local";

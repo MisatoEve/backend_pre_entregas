@@ -9,19 +9,19 @@ import {
 
 const Router = express.Router();
 
-//obtener todos los productos
+//▼Obtener todos los productos
 Router.get("/", getAllProductsCtr);
 
-//ontener un producto por id
+//▼Obtener un producto por id
 Router.get("/:pid", getProductByIdCtr);
 
-//agregar un producto a la base de datos
+//▼Agregar un producto a la base de datos
 Router.post("/", addNewProductCtr);
 
-//modificar un producto
+//▼Modificar un producto
 Router.put("/:pid", updateProductCtr);
 
-//eliminar un producto
+//▼Eliminar un producto
 Router.delete("/:pid", deleteProductCtr);
 
 export default Router;

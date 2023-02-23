@@ -1,6 +1,6 @@
 import { ProductsService } from "../services/products.services.js";
 
-//buscar todos los producto
+//▼Buscar todos los productos
 export const getAllProductsCtr = async (req, res) => {
   try {
     const { query, limit, sort, page } = req.query;
@@ -37,7 +37,7 @@ export const getAllProductsCtr = async (req, res) => {
   }
 };
 
-//buscar un prodcuto por id
+//▼Buscar un prodcuto por id
 export const getProductByIdCtr = async (req, res) => {
   try {
     const { pid } = req.params;
@@ -54,7 +54,7 @@ export const getProductByIdCtr = async (req, res) => {
   }
 };
 
-//agregar un prodcuto a la base de datos
+//▼Agregar un prodcuto a la base de datos
 export const addNewProductCtr = async (req, res) => {
   try {
     const newProduct = req.body;
@@ -71,7 +71,7 @@ export const addNewProductCtr = async (req, res) => {
   }
 };
 
-//modificar un producto
+//▼Modificar un producto
 export const updateProductCtr = async (req, res) => {
   try {
     const { pid } = req.params;
@@ -89,7 +89,7 @@ export const updateProductCtr = async (req, res) => {
   }
 };
 
-//eliminar un producto
+//▼Eliminar un producto
 export const deleteProductCtr = async (req, res) => {
   try {
     const { pid } = req.params;
