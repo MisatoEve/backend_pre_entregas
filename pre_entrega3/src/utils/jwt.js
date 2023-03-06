@@ -54,3 +54,33 @@ export const passportCall = (strategy) => {
     })(req, res, next);
   };
 };
+
+export const passportCallHome = (strategy) => {
+  return async (req, res, next) => {
+    passport.authenticate(strategy, (err, user, info) => {
+      if (err) return next();
+      if (!user) return res.render("login");
+
+      req.user = user;
+
+      next();
+    })(req, res, next);
+  };
+};
+
+const POLICIES = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+};
+
+export const authAdminPolicies = (policies) => (req, res, next) => {
+  if (policies === POLICIES.ADMIN) return next();
+
+  next();
+};
+
+export const authUserPolicies = (policies) => (req, res, next) => {
+  if (policies === POLICIES.USER) return next();
+
+  next();
+};

@@ -4,8 +4,14 @@
       {{this.user.first_name}}
       {{this.user.last_name}}</h2>
     <div class="welcome__navbar">
-      <li class="welcome__navbar--li"><a href="/admin">Administrador</a></li>
+      <li class="welcome__navbar--li"><a
+          href="/api/sessions/current"
+        >Administrar Perfil</a></li>
       <li class="welcome__navbar--li"><a href="/logout">Logout</a></li>
+      <li class="welcome__navbar--li"><a
+          href="/carts/{{this.user.cart}}"
+        >Carrito</a></li>
+        <li>{{this.user.cart}}</li>
     </div>
   {{/if}}
   <div class="pagination__container">

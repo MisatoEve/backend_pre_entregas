@@ -1,12 +1,16 @@
+import { CartServices } from "../../carts/services/carts.services.js";
 import userModel from "../../models/users.model.js";
 import { generateToken } from "../../utils/jwt.js";
+import UserDto from "../dto/user.dto.js";
 
 class UserServices {
   finAll = async () => {
     try {
       const users = await userModel.find().lean().exec();
 
-      return users;
+      const mapedUser = users.map((user) => new UserDto(user));
+
+      return mapedUser;
     } catch (error) {
       console.log(error);
     }
@@ -14,7 +18,9 @@ class UserServices {
 
   findUser = async (email) => {
     try {
-      const user = await userModel.findOne({ email }).lean().exec();
+      const result = await userModel.findOne({ email }).lean().exec();
+
+      const user = new UserDto(result);
 
       return user;
     } catch (error) {
@@ -24,7 +30,7 @@ class UserServices {
 
   registerUser = async (req, username, password, done) => {
     try {
-      const user = await this.findUser(username);
+      const user = await userModel.findOne({ email: username }).lean().exec();
 
       if (user) {
         return done(null, false);
@@ -36,6 +42,7 @@ class UserServices {
         email: req.body.email,
         age: req.body.age,
         password: await userModel.encryptPassword(password),
+        cart: await CartServices.createCart(),
       };
 
       const createNewUser = await userModel.create(newUser);
@@ -50,7 +57,7 @@ class UserServices {
 
   loginUser = async (username, password, done) => {
     try {
-      const user = await this.findUser(username);
+      const user = await userModel.findOne({ email: username }).lean().exec();
 
       if (!user) {
         console.log("User Not Found");
@@ -69,11 +76,15 @@ class UserServices {
         return done(null, false);
       }
 
-      const token = generateToken(user);
+      const dtoUser = new UserDto(user);
 
-      user.token = token;
+      const token = generateToken(dtoUser);
 
-      return done(null, user);
+      dtoUser.token = token;
+
+      //console.log(dtoUser);
+
+      return done(null, dtoUser);
     } catch (error) {
       console.log(error);
 

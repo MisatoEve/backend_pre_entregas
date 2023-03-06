@@ -5,7 +5,6 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import __dirname, { MongoStoreInstance } from "./utils.js";
 import session from "express-session";
-import MongoStore from "connect-mongo";
 import productsRouter from "./products/routes/products.routes.js";
 import cartRouter from "./carts/routes/carts.routes.js";
 import userRouter from "./users/routes/users.routes.js";

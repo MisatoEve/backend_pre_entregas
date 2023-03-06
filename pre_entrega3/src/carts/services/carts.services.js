@@ -47,8 +47,6 @@ class CartsServices {
 
       const findProduct = await cartsModel.findOne({ "carts.product": pid });
 
-      console.log(findProduct);
-
       if (findProduct) {
         const result = await cartsModel.updateOne(
           { "carts.product": pid },

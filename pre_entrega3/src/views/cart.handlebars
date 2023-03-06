@@ -1,6 +1,7 @@
 <main>
   <div class="cart__container">
     <h2>Carrito:</h2>
+    {{#if cart}}
     {{#each cart}}
       <div class="cart__products">
         <div class="product__card">
@@ -21,6 +22,8 @@
         <button class="cart__total--btn">confirmar compra</button>
       </div>
     </div>
+    {{else}}
+    <h3>El carrito se encuentra vacío</h3>
   </div>
 </main>
 <script src="/js/cart.js"></script>

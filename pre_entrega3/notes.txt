@@ -1,0 +1,48 @@
+<<INICIALIZAR PROYECTO>> ~NOTAS DE EVE~ ^^ MisatoEve
+
+$ npm init -y
+
+$ npm i express
+
+►Crear carpeta Src (sources)
+
+►Si vamos a utilizar "import" agregar en package.json "type": "modules"
+
+$ npm install express-handlebars
+
+$ npm i socket.io 
+
+$ npm install mongoose
+
+$ npm i mongoose-paginate-v2
+
+$ npm i cookie-parser (o npm i body-parser)
+
+$ npm i express-session
+
+$ npm i session-file-store 
+
+$ npm i connect-mongo 
+
+$ npm install bcrypt
+
+$ npm install passport passport-local 
+
+$ npm i passport-github2
+
+$ npm i passport-google-oauth2
+
+$ npm i jsonwebtoken 
+
+$ npm i passport-jwt
+
+$ npm install commander
+
+$ npm install dotenv
+
+$ npm install cors
+
+$ npm install nodemailer
+
+$ npm install twilio
+
