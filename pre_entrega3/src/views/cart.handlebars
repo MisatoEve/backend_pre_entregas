@@ -12,18 +12,27 @@
             <p>x{{this.quantity}}</p>
           </div>
         </div>
-        <button class="cart__deleteBtn" id="cart__product--deleteBtn" value={{this.product._id}}>Eliminar</button>
+        <button 
+          class="cart__deleteBtn" 
+          id="cart__product--deleteBtn" 
+          value={{this.product._id}}
+        >Eliminar</button>
       </div>
     {{/each}}
+  {{else}}
+    <h3>El carrito se encuentra vacio</h3>
+  {{/if}}
     <div class="cart__total">
       <h2>Total:</h2>
       <div class="cart__menu">
         <button class="cart__total--btn">vaciar carrito</button>
-        <button class="cart__total--btn">confirmar compra</button>
+        <button 
+          id="purchase__btn"
+          value={{cart._id}}
+          class="cart__total--btn"
+        >confirmar compra</button>
       </div>
     </div>
-    {{else}}
-    <h3>El carrito se encuentra vacío</h3>
   </div>
 </main>
 <script src="/js/cart.js"></script>

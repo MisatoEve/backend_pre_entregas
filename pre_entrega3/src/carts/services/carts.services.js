@@ -1,4 +1,7 @@
 import cartsModel from "../../models/carts.model.js";
+import ticketModel from "../../models/ticket.model.js";
+import userModel from "../../models/users.model.js";
+import { ProductsService } from "../../products/services/products.services.js";
 
 class CartsServices {
   createCart = async () => {
@@ -29,7 +32,9 @@ class CartsServices {
       const cart = await cartsModel
         .findById({ _id: cid })
         .populate("carts.product")
-        .lean();
+        .lean();      
+      
+        console.log(cart);
 
       if (!cart) throw new Error("Cart Not Found");
 
@@ -144,6 +149,50 @@ class CartsServices {
         { _id: cid },
         { $set: { carts: [] } }
       );
+
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  purchaseProducts = async (cid) => {
+    try {
+      const productsToPurchase = [];
+      //obtener las cantidad de cada producto
+      const cart = await this.getCartById(cid);
+      if (!cart) throw new Error("Cart Not Found");
+      //obtener la cantidad de stock
+      const products = Array.from(cart.carts);
+      //comparar cantidades
+      products.forEach(async (product) => {
+        if (ProductsService.updateProduct(product)) {
+          await this.deleteProductFromCart(product.product);
+          const result = await ProductsService.getProductById(product.product);
+          productsToPurchase.push(result.price);
+        }
+      });
+      //si hay stock restar y eliminar del carrito
+      //si no hay que permanezca en el carrito
+      const purchaser = await userModel.findOne({ cart: cid }).lean().exec();
+      //devolver el ticket con los productos adquiridos
+      const total = productsToPurchase.reduce((acc, cur) => acc + cur);
+      const ticket = await this.generateTicket(purchaser.email, total);
+
+      return ticket;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  generateTicket = async (purchaser, total) => {
+    try {
+      const result = await ticketModel.create({
+        amount: total,
+        purchaser: purchaser,
+      });
+
+      return result;
     } catch (error) {
       console.log(error);
     }

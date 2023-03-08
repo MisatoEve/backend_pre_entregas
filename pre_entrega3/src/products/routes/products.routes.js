@@ -1,4 +1,5 @@
 import express from "express";
+import { authPolicies, authToken } from "../../utils/jwt.js";
 import {
   getAllProductsCtr,
   getProductByIdCtr,
@@ -16,12 +17,12 @@ Router.get("/", getAllProductsCtr);
 Router.get("/:pid", getProductByIdCtr);
 
 //▼Agregar un producto a la base de datos
-Router.post("/", addNewProductCtr);
+Router.post("/", authToken, authPolicies("ADMIN"), addNewProductCtr);
 
 //▼Modificar un producto
-Router.put("/:pid", updateProductCtr);
+Router.put("/:pid", authToken, authPolicies("ADMIN"), updateProductCtr);
 
 //▼Eliminar un producto
-Router.delete("/:pid", deleteProductCtr);
+Router.delete("/:pid", authToken, authPolicies("ADMIN"), deleteProductCtr);
 
 export default Router;

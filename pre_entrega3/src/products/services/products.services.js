@@ -100,6 +100,27 @@ class ProductsServices {
       console.log(error);
     }
   };
+
+  updateStock = async (pid, quantity) => {
+    try {
+      const product = await this.getProductById(pid);
+
+      if (product.stock < quantity) {
+        console.log("No stock");
+
+        return false;
+      }
+
+      await productsModel.updateOne(
+        { _id: pid },
+        { $inc: { stock: -quantity } }
+      );
+
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export const ProductsService = new ProductsServices();

@@ -141,3 +141,21 @@ export const emptyCart = async (req, res) => {
     });
   }
 };
+
+export const purchaseCart = async (req, res) => {
+  try {
+    const { cid } = req.params;
+
+    const result = await CartServices.purchaseProducts(cid);
+
+    return res.status(200).send({
+      payload: result,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(400).send({
+      error: "Something went wrong",
+    });
+  }
+};

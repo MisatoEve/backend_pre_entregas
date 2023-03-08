@@ -9,9 +9,12 @@ import productsRouter from "./products/routes/products.routes.js";
 import cartRouter from "./carts/routes/carts.routes.js";
 import userRouter from "./users/routes/users.routes.js";
 import viewsRouter from "./client/routes/views.routes.js";
+import chatRouter from "./messages/routes/messages.router.js";
 import initializePassport from "./config/passport.config.js";
 import sessionRouter from "./users/routes/sessions.routes.js";
 import MongoConnection from "./mongo.js";
+import { Server } from "socket.io";
+import socket from "./socket.js";
 
 //▼Const and env variables
 dotenv.config();
@@ -44,8 +47,13 @@ app.use("/api/carts", cartRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/", userRouter);
 app.use("/", viewsRouter);
+app.use("/chat", chatRouter);
 
 //▼App.listen
-app.listen(PORT, () => {
+const httpServer = app.listen(PORT, () => {
   console.log("Server up!");
 });
+
+//▼Socket
+const io = new Server(httpServer);
+socket(io);

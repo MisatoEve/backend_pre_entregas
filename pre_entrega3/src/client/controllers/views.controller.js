@@ -1,5 +1,6 @@
 import { ProductsService } from "../../products/services/products.services.js";
 import UserService from "../../users/services/users.services.js";
+import { CartServices } from "../../carts/services/carts.services.js";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -32,9 +33,12 @@ export const getOneProduct = async (req, res) => {
 
     const response = await ProductsService.getProductById(pid);
 
+    const user = req.session.user;
+
     res.render("oneProduct", {
       style: "styles.css",
       response,
+      user,
     });
   } catch (error) {}
 };
@@ -68,9 +72,12 @@ export const getCartPage = async (req, res) => {
   try {
     const { cid } = req.params;
 
-    const result = await getCartById(cid);
+    const user = req.params;
+
+    const result = await CartServices.getCartById(cid);
     res.render("cart", {
       cart: result,
+      user,
     });
   } catch (error) {
     console.log(error);
