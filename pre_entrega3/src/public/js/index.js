@@ -1,24 +1,11 @@
 const socket = io();
-
-let user = "";
+const user = document.getElementById("user__name").innerHTML;
 const chatbox = document.getElementById("user__input");
 const messagesContainer = document.getElementById("messages__container");
 
-// modal para que el usuario se autentifique
-Swal.fire({
-  title: "Ingrese su email",
-  input: "text",
-  inputValidator: (value) => {
-    return !value && "Debe ingresar su email";
-  },
-  icon: "success",
-  allowOutsideClick: false,
-}).then((result) => {
-  user = result.value;
-  socket.emit("auth", user);
-});
+socket.emit("auth", user);
 
-// capto el evento cuando el usuario hace enter
+//▼Se capta el evento cuando el usuario hace enter
 chatbox.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     if (chatbox.value.trim().length > 0) {
@@ -28,12 +15,12 @@ chatbox.addEventListener("keyup", (event) => {
   }
 });
 
-//funcion para leer los mensajes de la base de datos
+//▼Leer los mensajes de la base de datos
 const loadMessages = (callback) => {
   socket.on("server:messages", callback);
 };
 
-//funcion para enviar al servidor el nuevo mensaje
+//▼Se envía al servidor el nuevo mensaje
 const saveMessage = (user, message) => {
   socket.emit("client:newMessage", {
     user,
@@ -45,7 +32,7 @@ const loadNewMessage = (callback) => {
   socket.on("server:newMessage", callback);
 };
 
-// funcion que toma un mensaje y lo pinta en el DOM
+//▼Se toma un mensaje y se lo pinta en el DOM
 const oneMessage = (message) => {
   const container = document.createElement("div");
 
@@ -57,18 +44,18 @@ const oneMessage = (message) => {
   return container;
 };
 
-//funcion que recibe el array de mensajes y los itera para pintarlos en el DOM
+//▼Se recibe el array de mensajes y los itera para pintarlos en el DOM
 const renderMessages = (messages) => {
   messagesContainer.innerHTML = "";
   messages.forEach((message) => messagesContainer.append(oneMessage(message)));
 };
 
-// pinta el nuevo mensaje al DOM
+//▼Se pinta el nuevo mensaje al DOM
 const appendNewMessage = (message) => {
   messagesContainer.append(oneMessage(message));
 };
 
-// cargando los mensajes cuando se carga la pagina
+//▼Cargar los mensajes cuando se carga la página
 window.addEventListener("DOMContentLoaded", () => {
   loadMessages(renderMessages);
   loadNewMessage(appendNewMessage);

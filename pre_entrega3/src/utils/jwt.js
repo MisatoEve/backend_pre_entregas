@@ -68,22 +68,13 @@ export const passportCallHome = (strategy) => {
   };
 };
 
-//const POLICIES = {
-//  ADMIN: "ADMIN",
-//  USER: "USER",
-//};
-
 export const authPolicies = (policies) => (req, res, next) => {
   const role = req.user.role;
 
   if (role !== policies)
-    return res.status(400).render("error", { error: "Not Authorized" });
+    return res.status(403).send({
+      error: "Not Authorized"
+    });
 
   next();
 };
-
-//export const authUserPolicies = (policies) => (req, res, next) => {
-//  if (policies === POLICIES.USER) return next();
-//
-//  next();
-//};

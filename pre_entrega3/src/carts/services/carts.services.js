@@ -32,9 +32,8 @@ class CartsServices {
       const cart = await cartsModel
         .findById({ _id: cid })
         .populate("carts.product")
-        .lean();      
-      
-        console.log(cart);
+        .lean()
+        .exec();      
 
       if (!cart) throw new Error("Cart Not Found");
 
@@ -158,26 +157,19 @@ class CartsServices {
 
   purchaseProducts = async (cid) => {
     try {
-      const productsToPurchase = [];
-      //obtener las cantidad de cada producto
       const cart = await this.getCartById(cid);
+
       if (!cart) throw new Error("Cart Not Found");
-      //obtener la cantidad de stock
+      
       const products = Array.from(cart.carts);
-      //comparar cantidades
-      products.forEach(async (product) => {
-        if (ProductsService.updateProduct(product)) {
-          await this.deleteProductFromCart(product.product);
-          const result = await ProductsService.getProductById(product.product);
-          productsToPurchase.push(result.price);
-        }
-      });
-      //si hay stock restar y eliminar del carrito
-      //si no hay que permanezca en el carrito
+
       const purchaser = await userModel.findOne({ cart: cid }).lean().exec();
-      //devolver el ticket con los productos adquiridos
-      const total = productsToPurchase.reduce((acc, cur) => acc + cur);
-      const ticket = await this.generateTicket(purchaser.email, total);
+      
+      const total = await this.removeProductFromStock(cid, products);
+
+      const reduceTotal = total.reduce((acc, curr) => acc + curr, 0);
+
+      const ticket = await this.generateTicket(purchaser.email, reduceTotal);
 
       return ticket;
     } catch (error) {
@@ -193,6 +185,31 @@ class CartsServices {
       });
 
       return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  removeProductFromStock = async (cid, products) => {
+    try {
+      const totalProducts = Promise.all(
+        products.map(async (product) => {
+          const productWithStock = await ProductsService.updateStock(
+            product.product._id,
+            product.quantity
+          );
+
+          if (productWithStock) {
+            await this.deleteProductFromCart(cid, product.product._id);
+
+            return product.product.price * product.quantity;
+          }
+
+          return 0
+        })
+      );
+
+      return totalProducts;
     } catch (error) {
       console.log(error);
     }

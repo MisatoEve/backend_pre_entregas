@@ -2,10 +2,10 @@
   <div class="cart__container">
     <h2>Carrito:</h2>
     {{#if cart}}
-    {{#each cart}}
+    {{#each cart.carts}}
       <div class="cart__products">
         <div class="product__card">
-          <img src={{this.product.thumbnail}} alt="product__image" />
+          <img src={{this.product.thumbnail}} />
           <div class="product__card--info">
             <h4>{{this.product.title}}</h4>
             <h5>${{this.product.price}}</h5>

@@ -82,8 +82,6 @@ class UserServices {
 
       dtoUser.token = token;
 
-      //console.log(dtoUser);
-
       return done(null, dtoUser);
     } catch (error) {
       console.log(error);
