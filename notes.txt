@@ -46,3 +46,6 @@ $ npm install nodemailer
 
 $ npm install twilio
 
+$ npm install @faker-js/faker
+
+$ npm install express-compression
