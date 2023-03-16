@@ -8,10 +8,14 @@ const productsSchema = new Schema({
   description: String,
   code: String,
   price: Number,
-  status: Boolean,
+  status: {
+    type: Boolean,
+    default: true,
+  },
   stock: {
     type: Number,
     index: true,
+    default: 0,
   },
   category: {
     type: String,
@@ -20,6 +24,7 @@ const productsSchema = new Schema({
   thumbnails: {
     type: Array,
     index: true,
+    default: [],
   },
 });
 

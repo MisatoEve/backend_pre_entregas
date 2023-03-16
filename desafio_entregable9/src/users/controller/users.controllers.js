@@ -6,6 +6,7 @@ export const getRegister = (req, res) => {
     res.render("register");
   } catch (error) {
     console.log(error);
+    res.render("error");
   }
 };
 
@@ -14,6 +15,7 @@ export const getLogin = (req, res) => {
     res.render("login");
   } catch (error) {
     console.log(error);
+    res.render("error");
   }
 };
 
@@ -35,13 +37,6 @@ export const postLogin = (req, res) => {
   }
 
   req.session.user = req.user;
-  //{
-  //  first_name: req.user.first_name,
-  //  last_name: req.user.last_name,
-  //  email: req.user.email,
-  //  age: req.user.age,
-  //  role: req.user.role,
-  //};
 
   res.cookie(process.env.COOKIE_NAME, req.user.token).redirect("/products");
 };
@@ -53,5 +48,6 @@ export const getCurrentUser = (req, res) => {
     res.status(200).render("session", { styles: "style.css", user });
   } catch (error) {
     console.log(error);
+    res.render("error");
   }
 };

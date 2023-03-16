@@ -12,9 +12,11 @@ import viewsRouter from "./client/routes/views.routes.js";
 import chatRouter from "./messages/routes/messages.router.js";
 import initializePassport from "./config/passport.config.js";
 import sessionRouter from "./users/routes/sessions.routes.js";
+import productsMockRouter from "./mocks/routes/productsMock.routes.js";
 import MongoConnection from "./mongo.js";
 import { Server } from "socket.io";
 import socket from "./socket.js";
+import { errorHandler } from "./middlewares/errors/index.js";
 
 //▼Const and env variables
 dotenv.config();
@@ -40,6 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(errorHandler)
 
 //▼Routers
 app.use("/api/products", productsRouter);
@@ -48,6 +51,7 @@ app.use("/api/sessions", sessionRouter);
 app.use("/", userRouter);
 app.use("/", viewsRouter);
 app.use("/chat", chatRouter);
+app.use("/", productsMockRouter);
 
 //▼App.listen
 const httpServer = app.listen(PORT, () => {

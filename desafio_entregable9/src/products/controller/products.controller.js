@@ -1,5 +1,7 @@
+import { ERRORS_ENUM } from "../../consts/ERRORS.js";
+import CustomError from "../../errors/customError.js";
+import { generateProductErrorInfo } from "../../errors/infoError.js";
 import { ProductsService } from "../services/products.services.js";
-
 //▼Buscar todos los productos
 export const getAllProductsCtr = async (req, res) => {
   try {
@@ -13,6 +15,12 @@ export const getAllProductsCtr = async (req, res) => {
     };
 
     const result = await ProductsService.getAllProducts(query, options);
+
+    if (!result) {
+      CustomError.createError({
+        message: ERRORS_ENUM["PRODUCT NOT FOUND"],
+      });
+    }
 
     return res.status(200).send({
       status: "succes",
@@ -31,12 +39,9 @@ export const getAllProductsCtr = async (req, res) => {
         : null,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(400).send("Something went wrong");
+    return res.status(400).send({  status: error.name, message: error.message });
   }
 };
-
 //▼Buscar un prodcuto por id
 export const getProductByIdCtr = async (req, res) => {
   try {
@@ -44,33 +49,48 @@ export const getProductByIdCtr = async (req, res) => {
 
     const result = await ProductsService.getProductById(pid);
 
+    if (!result) {
+      CustomError.createError({
+        message: ERRORS_ENUM["PRODUCT NOT FOUND"],
+      });
+    }
+
     return res.status(200).send({
       payload: result,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(400).send("Something went wrong");
+    return res.status(400).send({ status: error.name, message: error.message });
   }
 };
-
 //▼Agregar un prodcuto a la base de datos
 export const addNewProductCtr = async (req, res) => {
   try {
     const newProduct = req.body;
 
+    const { title, price, description, code, category } = newProduct;
+
+    if (!title || !price || !description || !code || !category) {
+      CustomError.createError({
+        name: ERRORS_ENUM["INVALID PRODUCT PROPERTY"],
+        message: generateProductErrorInfo(newProduct),
+      });
+    }
+
     const result = await ProductsService.addNewProduct(newProduct);
+
+    if (!result) {
+      CustomError.createError({
+        message: ERRORS_ENUM["INVALID PRODUCT PROPERTY"],
+      });
+    }
 
     return res.status(201).send({
       payload: result,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(400).send("Something went wrong");
+    return res.status(400).send({ status: error.name, message: error.message });
   }
 };
-
 //▼Modificar un producto
 export const updateProductCtr = async (req, res) => {
   try {
@@ -79,16 +99,19 @@ export const updateProductCtr = async (req, res) => {
 
     const result = await ProductsService.updateProduct(pid, newProduct);
 
+    if (!result) {
+      CustomError.createError({
+        message: ERRORS_ENUM["PRODUCT NOT FOUND"],
+      });
+    }
+
     return res.status(202).send({
       payload: result,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(400).send("Something went wrong");
+    return res.status(400).send({ status: error.name, message: error.message });
   }
 };
-
 //▼Eliminar un producto
 export const deleteProductCtr = async (req, res) => {
   try {
@@ -96,12 +119,16 @@ export const deleteProductCtr = async (req, res) => {
 
     const result = await ProductsService.deleteProduct(pid);
 
+    if (!result) {
+      CustomError.createError({
+        message: ERRORS_ENUM["PRODUCT NOT FOUND"],
+      });
+    }
+
     return res.status(202).send({
       payload: result,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(400).send("Something went wrong");
+    return res.status(400).send({ status: error.name, message: error.message });
   }
 };
