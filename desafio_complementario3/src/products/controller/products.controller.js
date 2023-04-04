@@ -77,7 +77,7 @@ export const addNewProductCtr = async (req, res) => {
       });
     }
 
-    const result = await ProductsService.addNewProduct(newProduct);
+    const result = await ProductsService.addNewProduct(newProduct, user);
 
     if (!result) {
       CustomError.createError({
@@ -119,7 +119,7 @@ export const deleteProductCtr = async (req, res) => {
     const { pid } = req.params;
     const user = req.session.user;
 
-    const result = await ProductsService.deleteProduct(pid);
+    const result = await ProductsService.deleteProduct(pid, user);
 
     if (!result) {
       CustomError.createError({

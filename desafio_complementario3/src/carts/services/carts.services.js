@@ -45,7 +45,7 @@ class CartsServices {
     }
   };
 
-  addProductToCart = async (cid, pid) => {
+  addProductToCart = async (cid, pid, user) => {
     try {
       const cart = await this.getCartById(cid);
 

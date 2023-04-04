@@ -50,7 +50,7 @@ class ProductsServices {
     }
   };
 
-  addNewProduct = async (newProduct) => {
+  addNewProduct = async (newProduct, user) => {
     try {
       const product = await productsModel.findOne({ code: newProduct.code });
 
