@@ -1,0 +1,27 @@
+<main class="layout">
+  <div class="login__container">
+    <h2 class="login__title"> —ฅ/ᐠ. ̫ .ᐟ\ฅ — Hello ≽ܫ≼</h2>
+    <p>INICIAR SESIÓN ▼ <a href="/register">  ¿No tenés cuenta?  ► CREAR CUENTA</a></p>
+    <form action="/login" method="post" class="login__form">
+      <input
+        type="text"
+        placeholder="email"
+        class="login__input"
+        name="email"
+      />
+      <input
+        type="password"
+        placeholder="password"
+        class="login__input"
+        name="password"
+      />
+      <div class="input__divider"></div>
+      <button type="submit" class="login__btn">Log</button>
+      {{!-- <a href="/auth/github"><button
+          type="button"
+          class="loginGitHub__btn"
+        >GitHub</button></a> --}}
+        <a href="/restore">¿Olvidaste tu contraseña?</a>
+    </form>
+  </div>
+</main>
