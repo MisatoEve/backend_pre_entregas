@@ -1,0 +1,18 @@
+<main>
+  <form
+    action="/restoreForm/{{uid}}/{{token}}"
+    method="post"
+    class="restore__form"
+  >
+    <p>Ingresa tu nueva contraseña a continuación. 
+        La contraseña nueva no podrá ser igual que la anterior</p>
+    <input
+      type="password"
+      placeholder="password"
+      class="restore__input"
+      name="password"
+    />
+    <div class="input__divider"></div>
+    <button type="submit" class="restore__btn">Restaurar</button>
+  </form>
+</main>

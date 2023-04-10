@@ -49,3 +49,21 @@ $ npm install twilio
 $ npm install @faker-js/faker
 
 $ npm install express-compression
+
+$ npm install -g yarn
+
+$ npm install npm@latest -g 
+
+$ npm install winston
+
+$ npm install -g artillery
+
+$ npm i swagger-jsdoc swagger-ui-express
+
+//▼ "devDependencies" ► dependencias de -desarrollo
+$ npm install -D mocha
+
+$ npm install -D chai
+
+//revisar en Settings 
+"Http: Proxy Support": "off" / "override"
