@@ -1,0 +1,66 @@
+<main>
+  {{#if user}}
+    <h2 class="welcome__message">Bienvenido
+      {{this.user.first_name}}
+      {{this.user.last_name}}</h2>
+    <div class="welcome__navbar">
+      <li class="welcome__navbar--li"><a
+          href="/api/sessions/current"
+        >Administrar Perfil</a></li>
+      <li class="welcome__navbar--li"><a href="/logout">Logout</a></li>
+      <li class="welcome__navbar--li"><a
+          href="/carts/{{this.user.cart}}"
+        >Carrito</a></li>
+        <li class="welcome__navbar--li"><a href="/chat">Chat</a></li>
+    </div>
+  {{/if}}
+  <div class="pagination__container">
+    <div class="filters__container">
+      <h4>Filters:</h4>
+      <div>category</div>
+      <button class="pagination__button">most expensive</button>
+      <button class="pagination__button">less expensive</button>
+    </div>
+    <div class="pages__container">
+      <a href={{response.prevLink}}><button
+          class="pagination__button"
+        >Anterior</button></a>
+      <a href={{response.nextLink}}><button
+          class="pagination__button"
+        >Siguiente</button></a>
+    </div>
+  </div>
+  <div class="products__container">
+    {{#each response.docs}}
+      <div class="product__container">
+        <div class="product__category">
+          <span>{{this.category}}</span>
+        </div>
+        <h3 class="product__title">{{this.title}}</h3>
+        <div class="product__img--container">
+          <img src={{this.thumbnail}} alt={{this.title}} />
+        </div>
+        <h4 class="product__price">${{this.price}}</h4>
+        <a href="/products/{{this._id}}"><button
+            class="product__button"
+          >Info</button></a>
+      </div>
+    {{/each}}
+  </div>
+  <div class="pagination__container">
+    <div class="filters__container">
+      <h4>Filters:</h4>
+      <div>category</div>
+      <button class="pagination__button">most expensive</button>
+      <button class="pagination__button">less expensive</button>
+    </div>
+    <div class="pages__container">
+      <a href={{response.prevLink}}><button
+          class="pagination__button"
+        >Anterior</button></a>
+      <a href={{response.nextLink}}><button
+          class="pagination__button"
+        >Siguiente</button></a>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,207 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+       - Products
+      responses:
+        "200":
+          description: Todos los productos fueron devueltos satisfactoriamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno en el server. Query invalida o fallo la conexion con la DB.
+    post:
+      summary: Crea un nuevo producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/newProduct'
+      responses:
+        "200":
+          description: Se creo satisfactoriamente el producto
+          content:
+            application/json:
+              schema:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno en el server. Query invalida o fallo la conexion con la DB.
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: ID del producto que se solicita
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Product'
+    put:
+      summary: Actualiza un producto a partir del ID
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: ID del producto que se solicita
+        schema:
+          $type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/updateProduct'
+      responses:
+        "200":
+          description: Se actualizo el producto satisfactoriamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno en el server. Query invalida o fallo la conexion con la DB.
+    delete:
+      summary: Elimina un producto a partir del ID
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: ID del producto que se solicita
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Se elimino el producto satisfactoriamente.
+        "500":
+          description: Error interno en el server. Query invalida o fallo la conexion con la DB.
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: ID auto generado en mongo
+        title:
+          type: String
+          description: titulo del producto
+        description:
+          type: String
+          description: descripcion del producto
+        code:
+          type: String
+          description: codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Estado del producto
+        stock:
+          type: Number
+          description: Cantidad en stock
+        category:
+          type: String
+          description: Categoria del producto
+        thumbnails:
+          type: Array
+          description: Fotos del producto
+        owner:
+          type: ObjectId
+          description: Id del usuario que creo el producto
+      example:
+        _id: 63c894566f3a17ef648d57ee
+        title": Call of Duty Vanguard Standard Edition Activision
+        price": 15499
+        description: Físico. PS4. Combinando realidad con ficción, Call of Duty es un juego único por su calidad de desarrollo. Su objetivo es que cada jugador logre conquistar todas las misiones, ya sea en una batalla contra otros ejércitos o combatiendo zombies. Sus gráficos, jugabilidad, desafíos e historias han hecho de la franquicia una de las más destacadas dentro de los videojuegos en primera persona.
+        category: video games
+        thumbnail: ["https://http2.mlstatic.com/D_NQ_NP_896840-MLA48556474374_122021-O.webp"]
+        code: CAMP345
+        state: true
+        stock: 12
+  requestBodies:
+    newProduct:
+      type: object
+      properties:
+        title:
+          type: String
+          description: titulo del producto
+        description:
+          type: String
+          description: descripcion del producto
+        code:
+          type: String
+          description: codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Estado del producto
+        stock:
+          type: Number
+          description: Cantidad en stock
+        category:
+          type: String
+          description: Categoria del producto
+        thumbnails:
+          type: Array
+          description: Fotos del producto
+        owner:
+          type: ObjectId
+          description: Id del usuario que creo el producto
+      example:
+        _id: 63c894566f3a17ef648d57ee
+        title": Call of Duty Vanguard Standard Edition Activision
+        price": 15499
+        description: Físico. PS4. Combinando realidad con ficción, Call of Duty es un juego único por su calidad de desarrollo. Su objetivo es que cada jugador logre conquistar todas las misiones, ya sea en una batalla contra otros ejércitos o combatiendo zombies. Sus gráficos, jugabilidad, desafíos e historias han hecho de la franquicia una de las más destacadas dentro de los videojuegos en primera persona.
+        category: video games
+        thumbnail: ["https://http2.mlstatic.com/D_NQ_NP_896840-MLA48556474374_122021-O.webp"]
+        code: CAMP345
+        state: true
+        stock: 12
+        owner: 63c894566f3a17ef648d57ee
+    updateProduct:
+      type: object
+      properties:
+        title:
+          type: String
+          description: titulo
+        description:
+          type: String
+          description: descripcion
+        price:
+          type: Number
+          description: precio
+        stock:
+          type: Number
+          description: stock
+      example:
+        title: Nuevo titulo
+        description: Nueva descripcion
+        price: 100
+        stock: 20
+tags: []

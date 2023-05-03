@@ -65,5 +65,10 @@ $ npm install -D mocha
 
 $ npm install -D chai
 
+$ npm i -D supertest
+
 //revisar en Settings 
 "Http: Proxy Support": "off" / "override"
+
+//
+$ npm install -g @nestjs/cli
